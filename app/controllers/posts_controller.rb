@@ -4,6 +4,12 @@ class PostsController < ApplicationController
 		@post = Post.new
 	end
 
+	def show
+		@group = Group.find(params[:id])
+		@post = @group.post.recent.paginate(:page => params[:page], :per_page => 5)
+		
+	end
+
 	def create
 		@group = Group.find(params[:group_id])
 		@post = Post.new(post_params)
